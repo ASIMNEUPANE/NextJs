@@ -1,3 +1,4 @@
 # NextJs
 
- next file base router -
+ next has file base router 
+ 
