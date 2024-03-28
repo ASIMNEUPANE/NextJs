@@ -1,8 +1,18 @@
 import axios from "axios";
+import client from '@/db'
 
 interface Data  {
-  name:string,
-  email:string,
+  username:string,
+  password:string,
+}
+
+async function fetchData(){
+  const user = await client.user.findFirst();
+  return {
+    username: user?.username,
+    password:user?.password,
+    
+  }
 }
 async function getUserDetails<Data>() {
   // await new Promise((r)=> setTimeout(r,5000))  --delay promise
@@ -10,16 +20,17 @@ async function getUserDetails<Data>() {
 	return response.data;
 }
 
+
 export default async function Home() {
-  const userData = await getUserDetails()
+  const userData = await fetchData()
   return ( <div className="flex flex-col justify-center h-screen">
   <div className="flex justify-center">
       <div className="border p-8 rounded">
           <div>
-              Name: {userData?.name}
+              Name: {userData?.username}
           </div>
           
-          {userData?.email}
+          {userData?.password}
       </div>
   </div>
 </div>
